@@ -9,9 +9,23 @@ class UserBooksController < ApplicationController
         end
     end
 
+    def update
+        user_book = UserBook.find(params[:id])
+        if user_book.update(user_book_params)
+            render json: user_book, status: :ok
+        else
+            render json: user_book.errors, status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+        UserBook.find(params[:id]).destroy
+    end
+
     private
 
     def user_book_params
-        params.permit(:book_id)
+        params.permit(:book_id, :read)
     end
+    
 end
