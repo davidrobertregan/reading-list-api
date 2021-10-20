@@ -1,4 +1,5 @@
 class UserBooksController < ApplicationController
+    before_action :confirm_authentication
 
     def create
         user_book = current_user.user_books.new(user_book_params)
